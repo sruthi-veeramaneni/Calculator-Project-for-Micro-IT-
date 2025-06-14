@@ -1,0 +1,94 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class CalculatorConsole {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<String> history = new ArrayList<>();
+
+        System.out.println("======================================");
+        System.out.println("       WELCOME TO MITS CALCULATOR     ");
+        System.out.println("======================================");
+
+        boolean run = true;
+        while (run) {
+            System.out.println("\nChoose an operation:");
+            System.out.println("1. Addition (+)");
+            System.out.println("2. Subtraction (-)");
+            System.out.println("3. Multiplication (*)");
+            System.out.println("4. Division (/)");
+            System.out.println("5. View History");
+            System.out.println("6. Exit");
+            System.out.print("Enter your choice (1-6): ");
+
+            int choice = sc.nextInt();
+            double num1 = 0, num2 = 0, result = 0;
+            String record = "";
+            boolean valid = true;
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter first number: ");
+                    num1 = sc.nextDouble();
+                    System.out.print("Enter second number: ");
+                    num2 = sc.nextDouble();
+                    result = num1 + num2;
+                    record = num1 + " + " + num2 + " = " + result;
+                    break;
+                case 2:
+                    System.out.print("Enter first number: ");
+                    num1 = sc.nextDouble();
+                    System.out.print("Enter second number: ");
+                    num2 = sc.nextDouble();
+                    result = num1 - num2;
+                    record = num1 + " - " + num2 + " = " + result;
+                    break;
+                case 3:
+                    System.out.print("Enter first number: ");
+                    num1 = sc.nextDouble();
+                    System.out.print("Enter second number: ");
+                    num2 = sc.nextDouble();
+                    result = num1 * num2;
+                    record = num1 + " * " + num2 + " = " + result;
+                    break;
+                case 4:
+                    System.out.print("Enter first number: ");
+                    num1 = sc.nextDouble();
+                    System.out.print("Enter second number: ");
+                    num2 = sc.nextDouble();
+                    if (num2 != 0) {
+                        result = num1 / num2;
+                        record = num1 + " / " + num2 + " = " + result;
+                    } else {
+                        System.out.println("⚠ Error: Division by zero is not allowed.");
+                        valid = false;
+                    }
+                    break;
+                case 5:
+                    System.out.println("\n📜 Calculation History:");
+                    if (history.isEmpty()) {
+                        System.out.println("No previous calculations found.");
+                    } else {
+                        for (String h : history) {
+                            System.out.println("- " + h);
+                        }
+                    }
+                    continue; 
+                case 6:
+                    System.out.println("\n👋 Thank you for using the calculator. Goodbye!");
+                    run = false;
+                    continue;
+                default:
+                    System.out.println("Invalid choice. Please enter a number between 1 and 6.");
+                    valid = false;
+            }
+
+            if (valid && choice >= 1 && choice <= 4) {
+                System.out.println("✅ Result: " + result);
+                history.add(record);
+            }
+        }
+
+        sc.close();
+    }
+}
